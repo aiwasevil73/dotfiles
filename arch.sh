@@ -47,7 +47,7 @@ echo "--------------------------------------"
 echo "-- Setup Dependencies               --"
 echo "--------------------------------------"
 
-pacstrap /mnt networkmanager network-manager-applet wireless_tools nano intel-ucode bluez bluez-utils blueman git --noconfirm --needed
+pacstrap /mnt networkmanager network-manager-applet wireless_tools nano git timeshift firefox vlc strawberry intel-ucode bluez bluez-utils blueman git --noconfirm --needed
 
 # fstab
 genfstab -U /mnt >> /mnt/etc/fstab
@@ -78,7 +78,7 @@ sed -i 's/^#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen
 locale-gen
 echo "LANG=en_US.UTF-8" >> /etc/locale.conf
 
-ln -sf /usr/share/zoneinfo/Asia/Kathmandu /etc/localtime
+ln -sf /usr/share/zoneinfo/Asia/Kuala_lumpur /etc/localtime
 hwclock --systohc
 
 echo "arch" > /etc/hostname
@@ -99,7 +99,7 @@ systemctl enable NetworkManager bluetooth
 #DESKTOP ENVIRONMENT
 if [[ $DESKTOP == '1' ]]
 then 
-    pacman -S gnome gdm --noconfirm --needed
+    pacman -S gnome gdm gnome-terminal gnome-tweaks --noconfirm --needed
     systemctl enable gdm
 elif [[ $DESKTOP == '2' ]]
 then
@@ -107,7 +107,7 @@ then
     systemctl enable sddm
 elif [[ $DESKTOP == '3' ]]
 then
-    pacman -S xfce4 xfce4-goodies lightdm lightdm-gtk-greeter --noconfirm --needed
+    pacman -S xfce4 xfce4-goodies lightdm lightdm-gtk-greeter gnome-terminal timeshift vlc strawberry --noconfirm --needed
     systemctl enable lightdm
 else
     echo "You have choosen to Install Desktop Yourself"
